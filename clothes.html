@@ -3,51 +3,640 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professional Clothes Shopping</title>
+    <title>Professional Clothes & Apparel Shop</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        nav {
+            background-color: #333;
+            padding: 0;
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        nav li {
+            margin: 0;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 12px 20px;
+            transition: background-color 0.3s;
+        }
+        
+        nav a:hover {
+            background-color: #667eea;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            gap: 20px;
+        }
+        
+        aside {
+            flex: 0 0 250px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            height: fit-content;
+        }
+        
+        aside h2 {
+            margin-bottom: 20px;
+            color: #667eea;
+            font-size: 1.5em;
+        }
+        
+        .filter-group {
+            margin-bottom: 20px;
+        }
+        
+        .filter-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+        
+        .filter-group input[type="range"]{
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        .filter-group select {
+            cursor: pointer;
+        }
+        
+        .price-display {
+            margin-bottom: 10px;
+            color: #667eea;
+            font-weight: 600;
+        }
+        
+        .filter-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #667eea;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        .filter-btn:hover {
+            background-color: #764ba2;
+        }
+        
+        main {
+            flex: 1;
+        }
+        
+        main h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 2em;
+        } 
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #e0e0e0 0%, #f5f5f5 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 14px;
+            overflow: hidden;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .product-content {
+            padding: 15px;
+        }
+        
+        .product-card h3 {
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+        
+        .product-description {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+        
+        .product-price {
+            font-size: 1.5em;
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .product-rating {
+            color: #ffc107;
+            margin-bottom: 8px;
+            font-size: 0.9em;
+        }
+        
+        .product-specs {
+            font-size: 0.85em;
+            color: #777;
+            margin-bottom: 10px;
+        }
+        
+        .add-to-cart-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #667eea;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        .add-to-cart-btn:hover {
+            background-color: #764ba2;
+        }
+        
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+        
+        .no-products {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            aside {
+                flex: 1;
+            }
+            
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+            
+            header h1 {
+                font-size: 1.8em;
+            }
+            
+            nav ul {
+                flex-direction: column;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1>Welcome to Professional Clothes Shopping</h1>
-        <nav>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About Us</a></li>
-                <li><a href="#products">Products</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
+        <h1>👗 Professional Clothes & Apparel Shop</h1>
+        <p>Your destination for quality clothing</p>
     </header>
-    <main>
-        <section id="about">
-            <h2>About Us</h2>
-            <p>We offer a wide selection of professional attire to ensure you look your best.</p>
-        </section>
-        <section id="products">
-            <h2>Our Products</h2>
-            <div class="product">
-                <h3>Formal Shirt</h3>
-                <p>Price: $29.99</p>
-                <button>Add to Cart</button>
+    
+    <nav>
+        <ul>
+            <li><a href="index.html">🏠 Home</a></li>
+            <li><a href="clothes.html">👕 Clothes</a></li>
+            <li><a href="skincare.html">💆 Skincare</a></li>
+            <li><a href="#contact">📞 Contact</a></li>
+            <li><a href="#cart">🛒 Cart (0)</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        <aside>
+            <h2>🔍 Filter Products</h2>
+            <form id="filter-form">
+                <div class="filter-group">
+                    <label for="category">Category:</label>
+                    <select id="category" name="category">
+                        <option value="">All Categories</option>
+                        <option value="shirts">Shirts & Tops</option>
+                        <option value="pants">Pants</option>
+                        <option value="dresses">Dresses</option>
+                        <option value="jackets">Jackets</option>
+                        <option value="accessories">Accessories</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="price-range">Price Range: <span class="price-display">$10 - $500</span></label>
+                    <input type="range" id="price-range" name="price-range" min="10" max="500" value="500" step="10">
+                </div>
+                
+                <div class="filter-group">
+                    <label for="size">Size:</label>
+                    <select id="size" name="size">
+                        <option value="">All Sizes</option>
+                        <option value="XS">Extra Small (XS)</option>
+                        <option value="S">Small (S)</option>
+                        <option value="M">Medium (M)</option>
+                        <option value="L">Large (L)</option>
+                        <option value="XL">Extra Large (XL)</option>
+                        <option value="2XL">2X Large (2XL)</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="color">Color:</label>
+                    <select id="color" name="color">
+                        <option value="">All Colors</option>
+                        <option value="black">Black</option>
+                        <option value="white">White</option>
+                        <option value="blue">Blue</option>
+                        <option value="red">Red</option>
+                        <option value="green">Green</option>
+                        <option value="navy">Navy</option>
+                        <option value="gray">Gray</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="material">Material:</label>
+                    <select id="material" name="material">
+                        <option value="">All Materials</option>
+                        <option value="cotton">100% Cotton</option>
+                        <option value="polyester">Polyester Blend</option>
+                        <option value="wool">Wool</option>
+                        <option value="silk">Silk</option>
+                        <option value="denim">Denim</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="filter-btn">Apply Filters</button>
+            </form>
+        </aside>
+        
+        <main>
+            <h2>Our Collections</h2>
+            <div class="product-grid" id="product-grid">
+                <!-- Shirts Section -->
+                <div class="product-card" data-category="shirts" data-price="34.99" data-size="S,M,L,XL" data-color="white" data-material="cotton">
+                    <div class="product-image">
+                        <img src="https://via.placeholder.com/280x250/FFFFFF/000000?text=Classic+White+Shirt" alt="Classic White Shirt">
+                    </div>
+                    <div class="product-content">
+                        <h3>Classic White Shirt</h3>
+                        <p class="product-description">Timeless white shirt perfect for any occasion</p>
+                        <div class="product-price">$34.99</div>
+                        <div class="product-rating">⭐⭐⭐⭐⭐ (245 reviews)</div>
+                        <div class="product-specs">Sizes: S, M, L, XL | Material: 100% Cotton</div>
+                        <button class="add-to-cart-btn">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-category="shirts" data-price="39.99" data-size="M,L,XL,2XL" data-color="blue" data-material="polyester">
+                    <div class="product-image">
+                        <img src="https://via.placeholder.com/280x250/0066FF/FFFFFF?text=Blue+Dress+Shirt" alt="Blue Dress Shirt">
+                    </div>
+                    <div class="product-content">
+                        <h3>Blue Dress Shirt</h3>
+                        <p class="product-description">Professional blue shirt for business settings</p>
+                        <div class="product-price">$39.99</div>
+                        <div class="product-rating">⭐⭐⭐⭐ (198 reviews)</div>
+                        <div class="product-specs">Sizes: M, L, XL, 2XL | Material: Polyester Blend</div>
+                        <button class="add-to-cart-btn">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-category="shirts" data-price="29.99" data-size="XS,S,M,L" data-color="red" data-material="cotton">
+                    <div class="product-image">
+                        <img src="https://via.placeholder.com/280x250/FF0000/FFFFFF?text=Red+Casual+Tee" alt="Red Casual T-Shirt">
+                    </div>
+                    <div class="product-content">
+                        <h3>Red Casual T-Shirt</h3>
+                        <p class="product-description">Comfortable casual t-shirt for everyday wear</p>
+                        <div class="product-price">$29.99</div>
+                        <div class="product-rating">⭐⭐⭐⭐⭐ (312 reviews)</div>
+                        <div class="product-specs">Sizes: XS, S, M, L | Material: 100% Cotton</div>
+                        <button class="add-to-cart-btn">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <!-- Pants Section -->
+                <div class="product-card" data-category="pants" data-price="59.99" data-size="S,M,L,XL" data-color="black" data-material="denim">
+                    <div class="product-image">
+                        <img src="https://via.placeholder.com/280x250/1A1A1A/FFFFFF?text=Black+Jeans" alt="Black Denim Jeans">
+                    </div>
+                    <div class="product-content">
+                        <h3>Black Denim Jeans</h3>
+                        <p class="product-description">Classic black jeans for versatile styling</p>
+                        <div class="product-price">$59.99</div>
+                        <div class="product-rating">⭐⭐⭐⭐⭐ (421 reviews)</div>
+                        <div class="product-specs">Sizes: S, M, L, XL | Material: Denim</div>
+                        <button class="add-to-cart-btn">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-category="pants" data-price="54.99" data-size="M,L,XL,2XL" data-color="navy" data-material="polyester">
+                    <div class="product-image">
+                        <img src="https://via.placeholder.com/280x250/000080/FFFFFF?text=Navy+Dress+Pants" alt="Navy Dress Pants">
+                    </div>
+                    <div class="product-content">
+                        <h3>Navy Dress Pants</h3>
+                        <p class="product-description">Professional navy pants for work attire</p>
+                        <div class="product-price">$54.99</div>
+                        <div class="product-rating">⭐⭐⭐⭐ (267 reviews)</div>
+                        <div class="product-specs">Sizes: M, L, XL, 2XL | Material: Polyester Blend</div>
+                        <button class="add-to-cart-btn">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-category="pants" data-price="49.99" data-size="XS,S,M,L" data-color="gray" data-material="cotton">
+                    <div class="product-image">
+                        <img src="https://via.placeholder.com/280x250/808080/FFFFFF?text=Gray+Chinos" alt="Gray Chinos">
+                    </div>
+                    <div class="product-content">
+                        <h3>Gray Chino Pants</h3>
+                        <p class="product-description">Comfortable chino pants for casual elegance</p>
+                        <div class="product-price">$49.99</div>
+                        <div class="product-rating">⭐⭐⭐⭐ (184 reviews)</div>
+                        <div class="product-specs">Sizes: XS, S, M, L | Material: Cotton Blend</div>
+                        <button class="add-to-cart-btn">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <!-- Dresses Section -->
+                <div class="product-card" data-category="dresses" data-price="79.99" data-size="XS,S,M,L" data-color="black" data-material="silk">
+                    <div class="product-image">
+                        <img src="https://via.placeholder.com/280x250/000000/FFFFFF?text=Black+Evening+Dress" alt="Black Evening Dress">
+                    </div>
+                    <div class="product-content">
+                        <h3>Black Evening Dress</h3>
+                        <p class="product-description">Elegant black dress for special occasions</p>
+                        <div class="product-price">$79.99</div>
+                        <div class="product-rating">⭐⭐⭐⭐⭐ (156 reviews)</div>
+                        <div class="product-specs">Sizes: XS, S, M, L | Material: Silk</div>
+                        <button class="add-to-cart-btn">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-category="dresses" data-price="69.99" data-size="S,M,L,XL" data-color="blue" data-material="polyester">
+                    <div class="product-image">
+                        <img src="https://via.placeholder.com/280x250/0066FF/FFFFFF?text=Blue+Summer+Dress" alt="Blue Summer Dress">
+                    </div>
+                    <div class="product-content">
+                        <h3>Blue Summer Dress</h3>
+                        <p class="product-description">Lightweight dress perfect for warm weather</p>
+                        <div class="product-price">$69.99</div>
+                        <div class="product-rating">⭐⭐⭐⭐ (203 reviews)</div>
+                        <div class="product-specs">Sizes: S, M, L, XL | Material: Polyester Blend</div>
+                        <button class="add-to-cart-btn">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-category="dresses" data-price="64.99" data-size="XS,S,M,L" data-color="red" data-material="cotton">
+                    <div class="product-image">
+                        <img src="https://via.placeholder.com/280x250/FF0000/FFFFFF?text=Red+Cocktail+Dress" alt="Red Cocktail Dress">
+                    </div>
+                    <div class="product-content">
+                        <h3>Red Cocktail Dress</h3>
+                        <p class="product-description">Stylish red dress for evening events</p>
+                        <div class="product-price">$64.99</div>
+                        <div class="product-rating">⭐⭐⭐⭐⭐ (289 reviews)</div>
+                        <div class="product-specs">Sizes: XS, S, M, L | Material: Cotton Blend</div>
+                        <button class="add-to-cart-btn">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <!-- Jackets Section -->
+                <div class="product-card" data-category="jackets" data-price="129.99" data-size="S,M,L,XL,2XL" data-color="black" data-material="wool">
+                    <div class="product-image">
+                        <img src="https://via.placeholder.com/280x250/1A1A1A/FFFFFF?text=Black+Wool+Blazer" alt="Black Wool Blazer">
+                    </div>
+                    <div class="product-content">
+                        <h3>Black Wool Blazer</h3>
+                        <p class="product-description">Premium wool blazer for professional look</p>
+                        <div class="product-price">$129.99</div>
+                        <div class="product-rating">⭐⭐⭐⭐⭐ (178 reviews)</div>
+                        <div class="product-specs">Sizes: S, M, L, XL, 2XL | Material: Wool</div>
+                        <button class="add-to-cart-btn">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-category="jackets" data-price="99.99" data-size="XS,S,M,L" data-color="navy" data-material="polyester">
+                    <div class="product-image">
+                        <img src="https://via.placeholder.com/280x250/000080/FFFFFF?text=Navy+Windbreaker" alt="Navy Windbreaker">
+                    </div>
+                    <div class="product-content">
+                        <h3>Navy Windbreaker</h3>
+                        <p class="product-description">Lightweight jacket for active lifestyle</p>
+                        <div class="product-price">$99.99</div>
+                        <div class="product-rating">⭐⭐⭐⭐ (214 reviews)</div>
+                        <div class="product-specs">Sizes: XS, S, M, L | Material: Polyester</div>
+                        <button class="add-to-cart-btn">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-category="jackets" data-price="119.99" data-size="M,L,XL,2XL" data-color="gray" data-material="wool">
+                    <div class="product-image">
+                        <img src="https://via.placeholder.com/280x250/808080/FFFFFF?text=Gray+Wool+Coat" alt="Gray Wool Coat">
+                    </div>
+                    <div class="product-content">
+                        <h3>Gray Wool Coat</h3>
+                        <p class="product-description">Warm and stylish wool coat for winter</p>
+                        <div class="product-price">$119.99</div>
+                        <div class="product-rating">⭐⭐⭐⭐⭐ (321 reviews)</div>
+                        <div class="product-specs">Sizes: M, L, XL, 2XL | Material: Wool</div>
+                        <button class="add-to-cart-btn">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <!-- Accessories Section -->
+                <div class="product-card" data-category="accessories" data-price="24.99" data-size="One Size" data-color="black" data-material="silk">
+                    <div class="product-image">
+                        <img src="https://via.placeholder.com/280x250/1A1A1A/FFFFFF?text=Silk+Tie" alt="Black Silk Tie">
+                    </div>
+                    <div class="product-content">
+                        <h3>Black Silk Tie</h3>
+                        <p class="product-description">Classic silk tie for formal occasions</p>
+                        <div class="product-price">$24.99</div>
+                        <div class="product-rating">⭐⭐⭐⭐ (95 reviews)</div>
+                        <div class="product-specs">Size: One Size | Material: Silk</div>
+                        <button class="add-to-cart-btn">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-category="accessories" data-price="19.99" data-size="One Size" data-color="gray" data-material="cotton">
+                    <div class="product-image">
+                        <img src="https://via.placeholder.com/280x250/808080/FFFFFF?text=Cotton+Scarf" alt="Gray Cotton Scarf">
+                    </div>
+                    <div class="product-content">
+                        <h3>Gray Cotton Scarf</h3>
+                        <p class="product-description">Versatile scarf for any season</p>
+                        <div class="product-price">$19.99</div>
+                        <div class="product-rating">⭐⭐⭐⭐⭐ (127 reviews)</div>
+                        <div class="product-specs">Size: One Size | Material: Cotton</div>
+                        <button class="add-to-cart-btn">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-category="accessories" data-price="34.99" data-size="One Size" data-color="black" data-material="leather">
+                    <div class="product-image">
+                        <img src="https://via.placeholder.com/280x250/1A1A1A/FFFFFF?text=Leather+Belt" alt="Black Leather Belt">
+                    </div>
+                    <div class="product-content">
+                        <h3>Black Leather Belt</h3>
+                        <p class="product-description">Premium leather belt for any outfit</p>
+                        <div class="product-price">$34.99</div>
+                        <div class="product-rating">⭐⭐⭐⭐⭐ (156 reviews)</div>
+                        <div class="product-specs">Size: One Size (Adjustable) | Material: Leather</div>
+                        <button class="add-to-cart-btn">Add to Cart</button>
+                    </div>
+                </div>
             </div>
-            <div class="product">
-                <h3>Business Suit</h3>
-                <p>Price: $119.99</p>
-                <button>Add to Cart</button>
-            </div>
-            <div class="product">
-                <h3>Dress Pants</h3>
-                <p>Price: $49.99</p>
-                <button>Add to Cart</button>
-            </div>
-        </section>
-        <section id="contact">
-            <h2>Contact Us</h2>
-            <p>Email: info@professionalclothes.com</p>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2026 Professional Clothes Shopping</p>
+        </main>
+    </div>
+    
+    <footer id="contact">
+        <h3>Contact Us</h3>
+        <p>Email: <strong>shop@professionalclothes.com</strong></p>
+        <p>Phone: <strong>1-800-CLOTHES</strong></p>
+        <p>&copy; 2026 Professional Clothes & Apparel Shop. All rights reserved.</p>
     </footer>
+    
+    <script>
+        // Filter functionality
+        document.getElementById('filter-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            applyFilters();
+        });
+        
+        // Update price display
+        document.getElementById('price-range').addEventListener('input', function() {
+            document.querySelector('.price-display').textContent = '$10 - $' + this.value;
+        });
+        
+        function applyFilters() {
+            const category = document.getElementById('category').value.toLowerCase();
+            const priceMax = parseInt(document.getElementById('price-range').value);
+            const size = document.getElementById('size').value.toUpperCase();
+            const color = document.getElementById('color').value.toLowerCase();
+            const material = document.getElementById('material').value.toLowerCase();
+            
+            const products = document.querySelectorAll('.product-card');
+            let visibleCount = 0;
+            
+            products.forEach(product => {
+                const productCategory = product.getAttribute('data-category');
+                const productPrice = parseFloat(product.getAttribute('data-price'));
+                const productSizes = product.getAttribute('data-size');
+                const productColor = product.getAttribute('data-color').toLowerCase();
+                const productMaterial = product.getAttribute('data-material').toLowerCase();
+                
+                let matches = true;
+                
+                if (category && productCategory !== category) matches = false;
+                if (productPrice > priceMax) matches = false;
+                if (size && !productSizes.includes(size)) matches = false;
+                if (color && productColor !== color) matches = false;
+                if (material && productMaterial !== material) matches = false;
+                
+                if (matches) {
+                    product.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+            
+            if (visibleCount === 0) {
+                const grid = document.getElementById('product-grid');
+                if (!document.querySelector('.no-products')) {
+                    const noProducts = document.createElement('div');
+                    noProducts.className = 'no-products';
+                    noProducts.innerHTML = '<p>No products found matching your filters. Try adjusting your criteria.</p>';
+                    grid.innerHTML = '';
+                    grid.appendChild(noProducts);
+                }
+            }
+        }
+        
+        // Add to cart functionality
+        document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const productName = this.parentElement.querySelector('h3').textContent;
+                alert(`${productName} has been added to your cart!`);
+            });
+        });
+    </script>
 </body>
 </html>
