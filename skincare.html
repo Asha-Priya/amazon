@@ -3,6 +3,283 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skincare Products - Serums, Moisturizers & Sunscreen</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f5f5f5; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        h1 { text-align: center; color: #333; margin-bottom: 30px; }
+        .filters { display: flex; gap: 20px; margin-bottom: 30px; flex-wrap: wrap; }
+        .filter-group { display: flex; flex-direction: column; }
+        .filter-group label { font-weight: bold; margin-bottom: 5px; color: #555; }
+        .filter-group select { padding: 8px 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; }
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+        .product-card { background: white; border-radius: 8px; padding: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s; }
+        .product-card:hover { transform: translateY(-5px); }
+        .product-type { display: inline-block; background: #e8f4f8; color: #0066cc; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: bold; margin-bottom: 8px; }
+        .product-type.serum { background: #fff3e0; color: #f57c00; }
+        .product-type.moisturizer { background: #f3e5f5; color: #7b1fa2; }
+        .product-type.sunscreen { background: #e0f2f1; color: #00897b; }
+        .product-card h3 { color: #333; margin-bottom: 8px; }
+        .product-info { font-size: 14px; color: #666; margin: 6px 0; }
+        .price { font-size: 18px; font-weight: bold; color: #27ae60; margin-top: 10px; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧴 Skincare Products - Serums, Moisturizers & Sunscreen</h1>
+        
+        <div class="filters">
+            <div class="filter-group">
+                <label for="skin-type">Skin Type:</label>
+                <select id="skin-type" onchange="filterProducts()">
+                    <option value="all">All Skin Types</option>
+                    <option value="dry">Dry</option>
+                    <option value="oily">Oily</option>
+                    <option value="combination">Combination</option>
+                    <option value="sensitive">Sensitive</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="concern">Skin Concern:</label>
+                <select id="concern" onchange="filterProducts()">
+                    <option value="all">All Concerns</option>
+                    <option value="hydration">Hydration</option>
+                    <option value="oil-control">Oil Control</option>
+                    <option value="anti-aging">Anti-Aging</option>
+                    <option value="sensitivity">Sensitivity</option>
+                    <option value="brightness">Brightness</option>
+                    <option value="protection">Protection</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="product-type">Product Type:</label>
+                <select id="product-type" onchange="filterProducts()">
+                    <option value="all">All Products</option>
+                    <option value="serum">Serums</option>
+                    <option value="moisturizer">Moisturizers</option>
+                    <option value="sunscreen">Sunscreen</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="products-grid" id="products-container">
+            <!-- SERUMS -->
+            <div class="product-card" data-skin-type="dry" data-concern="hydration" data-product-type="serum">
+                <span class="product-type serum">SERUM</span>
+                <h3>Hyaluronic Acid Serum</h3>
+                <p class="product-info"><strong>Brand:</strong> HydraGlow</p>
+                <p class="product-info"><strong>Skin Type:</strong> Dry</p>
+                <p class="product-info"><strong>Concern:</strong> Hydration</p>
+                <p class="product-info">Intensive hydration serum that plumps and moisturizes dry skin</p>
+                <p class="price">$24.99</p>
+            </div>
+
+            <div class="product-card" data-skin-type="oily" data-concern="oil-control" data-product-type="serum">
+                <span class="product-type serum">SERUM</span>
+                <h3>Niacinamide Control Serum</h3>
+                <p class="product-info"><strong>Brand:</strong> PureControl</p>
+                <p class="product-info"><strong>Skin Type:</strong> Oily</p>
+                <p class="product-info"><strong>Concern:</strong> Oil Control</p>
+                <p class="product-info">Lightweight serum that minimizes pores and controls excess oil</p>
+                <p class="price">$22.99</p>
+            </div>
+
+            <div class="product-card" data-skin-type="combination" data-concern="balance" data-product-type="serum">
+                <span class="product-type serum">SERUM</span>
+                <h3>Balancing Botanical Serum</h3>
+                <p class="product-info"><strong>Brand:</strong> BalanceKit</p>
+                <p class="product-info"><strong>Skin Type:</strong> Combination</p>
+                <p class="product-info"><strong>Concern:</strong> Balance</p>
+                <p class="product-info">Stabilizes skin with botanical extracts for combination skin</p>
+                <p class="price">$26.99</p>
+            </div>
+
+            <div class="product-card" data-skin-type="sensitive" data-concern="sensitivity" data-product-type="serum">
+                <span class="product-type serum">SERUM</span>
+                <h3>Calming Chamomile Serum</h3>
+                <p class="product-info"><strong>Brand:</strong> GentleCare</strong></p>
+                <p class="product-info"><strong>Skin Type:</strong> Sensitive</p>
+                <p class="product-info"><strong>Concern:</strong> Sensitivity</p>
+                <p class="product-info">Soothing serum with chamomile and aloe for irritated skin</p>
+                <p class="price">$28.99</p>
+            </div>
+
+            <div class="product-card" data-skin-type="dry" data-concern="anti-aging" data-product-type="serum">
+                <span class="product-type serum">SERUM</span>
+                <h3>Retinol Anti-Aging Serum</h3>
+                <p class="product-info"><strong>Brand:</strong> AgeDefier</p>
+                <p class="product-info"><strong>Skin Type:</strong> Dry</p>
+                <p class="product-info"><strong>Concern:</strong> Anti-Aging</p>
+                <p class="product-info">Advanced retinol serum reduces fine lines and wrinkles</p>
+                <p class="price">$35.99</p>
+            </div>
+
+            <div class="product-card" data-skin-type="oily" data-concern="brightness" data-product-type="serum">
+                <span class="product-type serum">SERUM</span>
+                <h3>Vitamin C Brightening Serum</h3>
+                <p class="product-info"><strong>Brand:</strong> RadiantLux</p>
+                <p class="product-info"><strong>Skin Type:</strong> Oily</p>
+                <p class="product-info"><strong>Concern:</strong> Brightness</p>
+                <p class="product-info">Brightening serum with vitamin C for radiant complexion</p>
+                <p class="price">$32.99</p>
+            </div>
+
+            <!-- MOISTURIZERS -->
+            <div class="product-card" data-skin-type="dry" data-concern="hydration" data-product-type="moisturizer">
+                <span class="product-type moisturizer">MOISTURIZER</span>
+                <h3>Rich Hydrating Cream</h3>
+                <p class="product-info"><strong>Brand:</strong> LuxeHydra</p>
+                <p class="product-info"><strong>Skin Type:</strong> Dry</p>
+                <p class="product-info"><strong>Concern:</strong> Hydration</p>
+                <p class="product-info">Ultra-rich cream for deep hydration and nourishment</p>
+                <p class="price">$29.99</p>
+            </div>
+
+            <div class="product-card" data-skin-type="oily" data-concern="oil-control" data-product-type="moisturizer">
+                <span class="product-type moisturizer">MOISTURIZER</span>
+                <h3>Lightweight Gel Moisturizer</h3>
+                <p class="product-info"><strong>Brand:</strong> MatteMoist</p>
+                <p class="product-info"><strong>Skin Type:</strong> Oily</p>
+                <p class="product-info"><strong>Concern:</strong> Oil Control</p>
+                <p class="product-info">Oil-free gel moisturizer with matte finish</p>
+                <p class="price">$21.99</p>
+            </div>
+
+            <div class="product-card" data-skin-type="combination" data-concern="balance" data-product-type="moisturizer">
+                <span class="product-type moisturizer">MOISTURIZER</span>
+                <h3>Balancing Daily Moisturizer</h3>
+                <p class="product-info"><strong>Brand:</strong> HarmonicCare</p>
+                <p class="product-info"><strong>Skin Type:</strong> Combination</p>
+                <p class="product-info"><strong>Concern:</strong> Balance</p>
+                <p class="product-info">Balanced formula for combination skin needs</p>
+                <p class="price">$25.99</p>
+            </div>
+
+            <div class="product-card" data-skin-type="sensitive" data-concern="sensitivity" data-product-type="moisturizer">
+                <span class="product-type moisturizer">MOISTURIZER</span>
+                <h3>Gentle Hydrating Lotion</h3>
+                <p class="product-info"><strong>Brand:</strong> PureGentlе</p>
+                <p class="product-info"><strong>Skin Type:</strong> Sensitive</p>
+                <p class="product-info"><strong>Concern:</strong> Sensitivity</p>
+                <p class="product-info">Non-irritating lotion for sensitive skin</p>
+                <p class="price">$27.99</p>
+            </div>
+
+            <div class="product-card" data-skin-type="dry" data-concern="anti-aging" data-product-type="moisturizer">
+                <span class="product-type moisturizer">MOISTURIZER</span>
+                <h3>Anti-Aging Night Cream</h3>
+                <p class="product-info"><strong>Brand:</strong> YouthfulEssence</p>
+                <p class="product-info"><strong>Skin Type:</strong> Dry</p>
+                <p class="product-info"><strong>Concern:</strong> Anti-Aging</p>
+                <p class="product-info">Intensive night cream with anti-aging peptides</p>
+                <p class="price">$38.99</p>
+            </div>
+
+            <div class="product-card" data-skin-type="combination" data-concern="brightness" data-product-type="moisturizer">
+                <span class="product-type moisturizer">MOISTURIZER</span>
+                <h3>Brightening Day Moisturizer</h3>
+                <p class="product-info"><strong>Brand:</strong> GlowUp</p>
+                <p class="product-info"><strong>Skin Type:</strong> Combination</p>
+                <p class="product-info"><strong>Concern:</strong> Brightness</p>
+                <p class="product-info">Day moisturizer with brightening complex</p>
+                <p class="price">$31.99</p>
+            </div>
+
+            <!-- SUNSCREENS -->
+            <div class="product-card" data-skin-type="dry" data-concern="protection" data-product-type="sunscreen">
+                <span class="product-type sunscreen">SUNSCREEN</span>
+                <h3>Hydrating Sunscreen SPF 50</h3>
+                <p class="product-info"><strong>Brand:</strong> SunShield</p>
+                <p class="product-info"><strong>Skin Type:</strong> Dry</p>
+                <p class="product-info"><strong>Concern:</strong> Protection</p>
+                <p class="product-info">Moisturizing sunscreen that hydrates while protecting</p>
+                <p class="price">$26.99</p>
+            </div>
+
+            <div class="product-card" data-skin-type="oily" data-concern="protection" data-product-type="sunscreen">
+                <span class="product-type sunscreen">SUNSCREEN</span>
+                <h3>Matte Finish Sunscreen SPF 50</h3>
+                <p class="product-info"><strong>Brand:</strong> MatteGuard</p>
+                <p class="product-info"><strong>Skin Type:</strong> Oily</p>
+                <p class="product-info"><strong>Concern:</strong> Protection</p>
+                <p class="product-info">Oil-free sunscreen with matte finish</p>
+                <p class="price">$24.99</p>
+            </div>
+
+            <div class="product-card" data-skin-type="combination" data-concern="protection" data-product-type="sunscreen">
+                <span class="product-type sunscreen">SUNSCREEN</span>
+                <h3>Lightweight Sunscreen SPF 50</h3>
+                <p class="product-info"><strong>Brand:</strong> EasyDefense</p>
+                <p class="product-info"><strong>Skin Type:</strong> Combination</p>
+                <p class="product-info"><strong>Concern:</strong> Protection</p>
+                <p class="product-info">Lightweight formula for combination skin</p>
+                <p class="price">$25.99</p>
+            </div>
+
+            <div class="product-card" data-skin-type="sensitive" data-concern="protection" data-product-type="sunscreen">
+                <span class="product-type sunscreen">SUNSCREEN</span>
+                <h3>Mineral Sunscreen SPF 50</h3>
+                <p class="product-info"><strong>Brand:</strong> PureSafe</p>
+                <p class="product-info"><strong>Skin Type:</strong> Sensitive</p>
+                <p class="product-info"><strong>Concern:</strong> Protection</p>
+                <p class="product-info">Gentle mineral sunscreen for sensitive skin</p>
+                <p class="price">$28.99</p>
+            </div>
+
+            <div class="product-card" data-skin-type="dry" data-concern="protection" data-product-type="sunscreen">
+                <span class="product-type sunscreen">SUNSCREEN</span>
+                <h3>Nourishing Sunscreen Lotion SPF 50+</h3>
+                <p class="product-info"><strong>Brand:</strong> NourishGlow</p>
+                <p class="product-info"><strong>Skin Type:</strong> Dry</p>
+                <p class="product-info"><strong>Concern:</strong> Protection</p>
+                <p class="product-info">Rich sunscreen lotion with nourishing oils</p>
+                <p class="price">$32.99</p>
+            </div>
+
+            <div class="product-card" data-skin-type="oily" data-concern="protection" data-product-type="sunscreen">
+                <span class="product-type sunscreen">SUNSCREEN</span>
+                <h3>Transparent Sun Gel SPF 50</h3>
+                <p class="product-info"><strong>Brand:</strong> ClearDefense</p>
+                <p class="product-info"><strong>Skin Type:</strong> Oily</p>
+                <p class="product-info"><strong>Concern:</strong> Protection</p>
+                <p class="product-info">Transparent gel sunscreen - no white cast</p>
+                <p class="price">$23.99</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function filterProducts() {
+            const skinType = document.getElementById('skin-type').value;
+            const concern = document.getElementById('concern').value;
+            const productType = document.getElementById('product-type').value;
+            const products = document.querySelectorAll('.product-card');
+
+            products.forEach(product => {
+                const productSkinType = product.getAttribute('data-skin-type');
+                const productConcern = product.getAttribute('data-concern');
+                const productProdType = product.getAttribute('data-product-type');
+
+                const skinTypeMatch = skinType === 'all' || productSkinType === skinType;
+                const concernMatch = concern === 'all' || productConcern === concern;
+                const typeMatch = productType === 'all' || productProdType === productType;
+
+                if (skinTypeMatch && concernMatch && typeMatch) {
+                    product.classList.remove('hidden');
+                } else {
+                    product.classList.add('hidden');
+                }
+            });
+        }
+    </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Skincare Brands and Products</title>
     <style>
         body { font-family: Arial, sans-serif; }
